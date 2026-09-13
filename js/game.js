@@ -281,7 +281,11 @@ const finishGame = (won) => {
   el("saveScoreButton").hidden = !won;
   el("saveScoreButton").disabled = false;
   el("saveScoreButton").textContent = "Save score";
-  resultModal.classList.remove("hidden");
+  setTimeout(() => {
+	resultModal.classList.remove("hidden");
+	el("saveScoreCheckbox").checked = true;
+  }, 2000);
+  playSound("start");
 };
 const chooseCard = (card) => {
   if (
