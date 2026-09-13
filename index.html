@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Match</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="game-shell">
+        <header class="topbar">
+            <div class="brand-lockup">
+                <div>
+                    <p class="eyebrow">Focus / Recall</p>
+                    <h1>Memory Match</h1>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="text-button" id="muteButton" type="button" aria-pressed="false">Sound on</button>
+                <button class="text-button" id="pauseButton" type="button" aria-pressed="false" disabled>Pause</button>
+                <button class="text-button" id="newGameButton" type="button">New game</button>
+            </div>
+        </header>
+        <p class="player-line">Playing as <strong id="playerDisplay">Player</strong></p>
+        <div class="hud" aria-live="polite">
+            <div><span class="hud-label">Tries</span><strong id="triesCount">0</strong></div>
+            <div><span class="hud-label">Time</span><strong id="timeCount">0s</strong></div>
+            <div><span class="hud-label">Score</span><strong id="scoreCount">0</strong></div>
+            <div><span class="hud-label">Pairs</span><strong id="progressCount">0 / 0</strong></div>
+            <div><span class="hud-label">Combo</span><strong id="comboCount">0x</strong></div>
+        </div>
+        <div class="game-layout">
+            <section class="board-wrap" aria-label="Memory cards">
+                <div class="progress-track" aria-label="Game progress"><span id="progressBar"></span></div>
+                <section id="gameBoard" class="board"></section>
+                <p id="statusMessage" class="status-message">Choose a difficulty to begin.</p>
+            </section>
+            <aside class="leaderboard-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">Local scores</p>
+                        <h2>Leaderboard</h2>
+                    </div>
+                    <button class="icon-button" id="clearScoresButton" type="button" title="Clear leaderboard" aria-label="Clear leaderboard">×</button>
+                </div>
+                <p class="story-label">Theme story</p>
+                <p id="storyText" class="story-text"></p>
+                <ol id="leaderboardList" class="leaderboard-list"></ol>
+            </aside>
+        </div>
+    </main>
+
+    <div class="modal-backdrop" id="setupModal" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
+        <div class="modal">
+            <p class="eyebrow">A fresh round</p>
+            <h2 id="setupTitle">Set your challenge</h2>
+            <p class="game-explanation">Flip two cards at a time, remember their places, and match every pair. Fewer tries and a faster time make a higher score.</p>
+            <label for="playerName">Your name</label>
+            <input id="playerName" type="text" maxlength="16" placeholder="Player" autocomplete="off">
+            <fieldset>
+                <legend>Difficulty</legend>
+                <div class="choice-grid">
+                    <label class="choice-card"><input type="radio" name="difficulty" value="easy" checked><span><strong>Easy</strong><small>12 cards · relaxed pace</small></span></label>
+                    <label class="choice-card"><input type="radio" name="difficulty" value="normal"><span><strong>Normal</strong><small>16 cards · balanced</small></span></label>
+                    <label class="choice-card"><input type="radio" name="difficulty" value="hard"><span><strong>Hard</strong><small>20 cards · demanding</small></span></label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Theme</legend>
+                <div class="theme-grid">
+                    <label class="theme-choice classic"><input type="radio" name="theme" value="classic" checked><span>Classic<small>Soft sounds</small></span></label>
+                    <label class="theme-choice horror"><input type="radio" name="theme" value="horror"><span>Horror<small>Creepy sounds</small></span></label>
+                    <label class="theme-choice funky"><input type="radio" name="theme" value="funky"><span>Funky<small>Arcade sounds</small></span></label>
+                </div>
+            </fieldset>
+            <button class="primary-button" id="startButton" type="button">Start game</button>
+        </div>
+    </div>
+
+    <div class="modal-backdrop hidden" id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+        <div class="modal result-modal">
+            <p class="eyebrow" id="resultKicker">Round complete</p>
+            <h2 id="resultTitle">You did it!</h2>
+            <p id="resultSummary"></p>
+            <div id="scoreBreakdown" class="score-breakdown"></div>
+            <label id="saveScoreOption" class="save-score-option"><input id="saveScoreCheckbox" type="checkbox" checked> Save this score to the top 5</label>
+            <button class="secondary-button" id="saveScoreButton" type="button">Save score</button>
+            <button class="primary-button" id="playAgainButton" type="button">Play again</button>
+        </div>
+    </div>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
