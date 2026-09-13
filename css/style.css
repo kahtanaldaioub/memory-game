@@ -14,6 +14,7 @@
 body {
     margin: 0;
     min-height: 100vh;
+    min-height: 100dvh;
     overflow-x: hidden;
     color: var(--ink);
     background: var(--paper);
@@ -41,8 +42,19 @@ button {
 .game-shell {
     width: min(1120px, calc(100% - 32px));
     min-height: 100vh;
+    min-height: 100dvh;
     margin: 0 auto;
     padding: 34px 0 48px;
+}
+
+.topbar,
+.brand-lockup,
+.header-actions,
+.hud,
+.game-layout,
+.board-wrap,
+.leaderboard-panel {
+    min-width: 0;
 }
 
 .topbar,
@@ -133,7 +145,7 @@ label {
     padding: 20px 0;
 }
 
-.hud>div {
+.hud > div {
     flex: 1;
     border-left: 2px solid var(--accent);
     padding-left: 12px;
@@ -314,7 +326,6 @@ label {
 }
 
 @keyframes wrong-vibrate {
-
     0%,
     100% {
         translate: 0;
@@ -459,7 +470,7 @@ label {
     font: .82rem/1.5 Arial, sans-serif;
 }
 
-.modal>label,
+.modal > label,
 legend {
     display: block;
     margin-bottom: 10px;
@@ -487,7 +498,7 @@ fieldset {
     padding: 14px 0 0;
 }
 
-fieldset+fieldset {
+fieldset + fieldset {
     padding-top: 18px;
 }
 
@@ -756,14 +767,18 @@ body.dark-mode .sound-choice:has(input:checked) {
 
 @media (min-width: 761px) {
     body {
-        height: 100vh;
-        overflow: hidden;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .game-shell {
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
         display: flex;
         flex-direction: column;
+        padding-bottom: 28px;
     }
 
     .game-layout {
@@ -778,7 +793,13 @@ body.dark-mode .sound-choice:has(input:checked) {
     }
 
     .board {
-        width: min(100%, 720px, calc(100vh - 260px));
+        width: min(100%, 720px, max(280px, calc(100vh - 260px)));
+        width: min(100%, 720px, max(280px, calc(100dvh - 260px)));
+    }
+
+    .leaderboard-panel {
+        max-height: none;
+        overflow: visible;
     }
 }
 
@@ -791,6 +812,8 @@ body.dark-mode .sound-choice:has(input:checked) {
         border-left: 0;
         border-top: 1px solid var(--line);
         padding: 24px 0 0;
+        max-height: none;
+        overflow: visible;
     }
 
     .modal {
@@ -814,6 +837,8 @@ body.dark-mode .sound-choice:has(input:checked) {
 
     .topbar {
         align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 14px;
     }
 
     .topbar h1 {
@@ -831,7 +856,7 @@ body.dark-mode .sound-choice:has(input:checked) {
         gap: 12px 18px;
     }
 
-    .hud>div {
+    .hud > div {
         padding-left: 7px;
     }
 
@@ -858,7 +883,7 @@ body.dark-mode .sound-choice:has(input:checked) {
     }
 
     .theme-grid {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .modal-backdrop {
@@ -868,6 +893,7 @@ body.dark-mode .sound-choice:has(input:checked) {
 
     .modal {
         max-height: calc(100vh - 24px);
+        max-height: calc(100dvh - 24px);
         padding: 18px;
     }
 
@@ -879,7 +905,7 @@ body.dark-mode .sound-choice:has(input:checked) {
         padding-top: 12px;
     }
 
-    fieldset+fieldset {
+    fieldset + fieldset {
         padding-top: 18px;
     }
 }
@@ -908,5 +934,9 @@ body.dark-mode .sound-choice:has(input:checked) {
 
     .board.hard {
         gap: 4px;
+    }
+
+    .theme-grid {
+        grid-template-columns: 1fr;
     }
 }
