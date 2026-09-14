@@ -69,41 +69,53 @@ const tone = (
   oscillator.stop(audioContext.currentTime + duration);
 };
 const playSound = (event) => {
-  const pack = { classic: "classic", horror: "funny", funky: "arcade" }[
+  const pack = { classic: "classic", horror: "scary", funky: "funny" }[
     game.theme
   ];
-
-  if (pack === "funny") {
+  if (pack === "scary") {
     if (event === "flip") {
-      tone(260, 0.12, "sawtooth", 0.035, 520);
-      setTimeout(() => tone(520, 0.08, "square", 0.03, 380), 90);
+      tone(1200, 0.06, "sawtooth", 0.03, 700);
+      setTimeout(() => tone(60, 0.35, "square", 0.06, 28), 40);
+      setTimeout(() => tone(847, 0.05, "sawtooth", 0.025, 1230), 90);
     }
     if (event === "match") {
-      tone(392, 0.1, "square", 0.05, 523);
-      setTimeout(() => tone(523, 0.1, "square", 0.05, 784), 80);
-      setTimeout(() => tone(784, 0.18, "square", 0.05, 1046), 160);
-      setTimeout(() => tone(1046, 0.14, "triangle", 0.04, 523), 260);
+      tone(311, 0.1, "sawtooth", 0.055, 305);
+      setTimeout(() => tone(330, 0.1, "sawtooth", 0.055, 322), 30);
+      setTimeout(() => tone(466, 0.14, "square", 0.05, 300), 90);
+      setTimeout(() => tone(155, 0.25, "sawtooth", 0.06, 77), 200);
+      setTimeout(() => tone(41, 0.5, "triangle", 0.06, 22), 380);
     }
     if (event === "wrong") {
-      tone(360, 0.14, "sawtooth", 0.05, 220);
-      setTimeout(() => tone(220, 0.14, "sawtooth", 0.05, 130), 120);
-      setTimeout(() => tone(130, 0.22, "sawtooth", 0.045, 65), 250);
+      tone(1400, 0.08, "sawtooth", 0.05, 1100);
+      setTimeout(() => tone(1100, 0.1, "sawtooth", 0.05, 700), 70);
+      setTimeout(() => tone(700, 0.12, "square", 0.055, 340), 160);
+      setTimeout(() => tone(340, 0.2, "sawtooth", 0.06, 160), 270);
+      setTimeout(() => tone(160, 0.35, "sawtooth", 0.07, 70), 440);
+      setTimeout(() => tone(48, 0.7, "square", 0.08, 24), 650);
+      setTimeout(() => tone(46, 0.7, "square", 0.08, 23), 900);
     }
     if (event === "start") {
-      tone(196, 0.1, "triangle", 0.04, 294);
-      setTimeout(() => tone(294, 0.1, "triangle", 0.04, 392), 100);
-      setTimeout(() => tone(392, 0.22, "sawtooth", 0.04, 660), 200);
+      tone(55, 0.4, "sawtooth", 0.05, 58);
+      setTimeout(() => tone(82, 0.4, "square", 0.05, 87), 200);
+      setTimeout(() => tone(116, 0.45, "sawtooth", 0.055, 123), 420);
+      setTimeout(() => tone(155, 0.5, "sawtooth", 0.06, 165), 660);
+      setTimeout(() => tone(207, 0.6, "square", 0.06, 220), 920);
+      setTimeout(() => tone(277, 0.9, "sawtooth", 0.07, 311), 1250);
+      setTimeout(() => tone(37, 1.2, "triangle", 0.07, 18), 1400);
     }
     if (event === "win") {
-      [392, 523, 659, 784, 1046, 1318].forEach((f, i) =>
-        setTimeout(() => tone(f, 0.14, "square", 0.045, f * 1.25), i * 90),
+      [523, 554, 622, 659, 740, 784, 831].forEach((f, i) =>
+        setTimeout(() => tone(f, 0.16, "square", 0.045, f * 0.88), i * 130),
       );
-      setTimeout(() => tone(1568, 0.3, "triangle", 0.04, 784), 600);
+      setTimeout(() => tone(494, 0.2, "sawtooth", 0.05, 494), 950);
+      setTimeout(() => tone(370, 0.4, "sawtooth", 0.06, 185), 1150);
+      setTimeout(() => tone(233, 0.7, "square", 0.07, 116), 1400);
+      setTimeout(() => tone(58, 1.4, "sawtooth", 0.08, 29), 1700);
     }
     return;
   }
 
-  if (pack === "arcade") {
+  if (pack === "funny") {
     if (event === "flip") {
       tone(660, 0.05, "square", 0.04, 990);
       setTimeout(() => tone(990, 0.04, "square", 0.035, 1320), 35);
@@ -282,8 +294,8 @@ const finishGame = (won) => {
   el("saveScoreButton").disabled = false;
   el("saveScoreButton").textContent = "Save score";
   setTimeout(() => {
-	resultModal.classList.remove("hidden");
-	el("saveScoreCheckbox").checked = true;
+    resultModal.classList.remove("hidden");
+    el("saveScoreCheckbox").checked = true;
   }, 2000);
   playSound("start");
 };
